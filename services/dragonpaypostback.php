@@ -4,45 +4,46 @@ This is the postback for DragonPay response.
 *******************************************/
 error_reporting(E_ALL); ini_set('display_errors', 1);
 
-$logs = '========= Log Start ['.current_time( "timestamp" ).'] ==========\n';
+$logs = '========= Log Start ['.date("l jS \of F Y h:i:s A").'] ==========\n';
 
 echo 'result=';
 
-if( false && !(isset($_GET['status']) and isset($_GET['txnid']) and isset($_GET['refno']) and isset($_GET['message']) and isset($_GET['digest'])) ){
+$logs.='Look for parameters\n';
 
-	$logs.='Look for _POST parameters\n';
+if(  !(isset($_POST['status']) and isset($_POST['txnid']) and isset($_POST['refno']) and isset($_POST['message']) and isset($_POST['digest'])) ){
+
 	$logs.='Failed. One or more parameters is missing.\n';
 	echo "MISSING_PARAMETERS";
 }
 else
 {
-	$txnid=$_GET['txnid']; 
-	$refno=$_GET['refno']; 
-	$status=$_GET['status']; 
-	$message=$_GET['message'];
-	$digest=$_GET['digest'];
+	$txnid=$_POST['txnid']; 
+	$refno=$_POST['refno']; 
+	$status=$_POST['status']; 
+	$message=$_POST['message'];
+	$digest=$_POST['digest'];
 
-	$logs.='txnid=$txnid:';
-	$logs.='refno=$refno:';
-	$logs.='message=$message:';
-	$logs.='status=$status:';
-	$logs.='digest=$digest\n';
+	$logs.='txnid='.$txnid.':';
+	$logs.='refno='.$refno.':';
+	$logs.='message='.$message.':';
+	$logs.='status='.$status.':';
+	$logs.='digest='.$digest.'\n';
 
 	$merchantid  = pmpro_getOption("dragonpay_merchant_id");
 	$merchantpwd = pmpro_getOption("dragonpay_secret_key");
 
 
-	$logs.='merchantid=$merchantid:';
-	$logs.='merchantpwd=$merchantpwd\n';
+	$logs.='merchantid='.$merchantid.':';
+	$logs.='merchantpwd='.$merchantpwd.'\n';
 
 	// Check digest authentication here
-	$digest_str = "$txnid:$refno:$status:$message:$merchantpwd";
+	$digest_str = $txnid.':'.$refno.':'.$status.':'.$message.':'.$merchantpwd;
 	$digest_test = sha1($digest_str);
 
-	$logs.='Checking digest: sha1($digest_str) = $digest_test\n';
+	$logs.='Checking digest: sha1('.$digest_str.') = '.$digest_test.'\n';
 
-	if( false && $digest_test != $digest){
-		$log.='Failed digest authentication.\n';
+	if( $digest_test != $digest){
+		$logs.='Failed digest authentication.\n';
 		echo "ACTIVATE_FAILED_DIGEST_MISMATCH";
 		return;
 	}
@@ -57,7 +58,7 @@ else
 	}
 
 	$logs.='Check status of transaction.';
-	$logs.='url = $url\n';
+	$logs.='url = '.$url.'\n';
 
 	// Get Request to DragonPay
 	$status = file_get_contents($url);
@@ -111,8 +112,15 @@ else
 			//set the start date to current_time('timestamp') but allow filters  (documented in preheaders/checkout.php)
 			$startdate = apply_filters( "pmpro_checkout_start_date", "'" . current_time( 'mysql' ) . "'", $morder->user_id, $morder->membership_level );
 
-			$logs.='Set startdate to $startdate.\n';
+			$logs.='Set startdate to '.$startdate.'\n';
 
+			//check if last order is active
+			$old_morder = new MemberOrder();
+			$old_morder->getLastMemberOrder($morder->user_id, 'success');
+
+
+			//echo json_encode($old_morder);
+			
 			//fix expiration date
 			if ( ! empty( $morder->membership_level->expiration_number ) ) {
 				$enddate = "'" . date_i18n( "Y-m-d", strtotime( "+ " . $morder->membership_level->expiration_number . " " . $morder->membership_level->expiration_period, current_time( "timestamp" ) ) ) . "'";
@@ -120,8 +128,19 @@ else
 				$enddate = "NULL";
 			}
 
-			$logs.='Set enddate to $enddate.\n';
 
+			//filter the enddate (documented in preheaders/checkout.php)
+			$enddate = apply_filters( "pmpro_checkout_end_date", $enddate, $morder->user_id, $morder->membership_level, $startdate );
+
+			$logs.="Expiry: ".$morder->membership_level->expiration_number.' '.$morder->membership_level->expiration_period;
+			$logs.="Enddate to: ".$enddate;
+
+
+			// $morder->ExpirationDate = $enddate;
+
+			//if($old_morder && $old_morder->id && $old_morder->status=='success'){
+			//	$enddate =  date("Y-m-d", strtotime(date("Y-m-d", strtotime($startdate)) . " + 1 year"));
+			//}
 
 			//get discount code
 			$morder->getDiscountCode();
@@ -132,7 +151,7 @@ else
 			} else {
 				$discount_code_id = "";
 			}
-			$logs.='Used discount_code_id to $discount_code_id.\n';
+			$logs.='Used discount_code_id to '.$discount_code_id.'\n';
 
 
 			//custom level to change user to
@@ -215,6 +234,31 @@ else
 			}
 	
 		break;
+		case 'P':
+			$logs.='Update order.\n';
+
+			//initial payment, get the order
+			$morder = new MemberOrder( $txnid );
+
+			//No order?
+			if ( empty( $morder ) || empty( $morder->id ) ) {
+				$logs.='Failed. Order not found.\n';
+				echo 'ERROR_UNKNOWN_ORDER';
+				return;
+			}
+			//get some more order info
+			$morder->getMembershipLevel();
+			$morder->getUser();
+
+			//update order status and transaction ids
+			$morder->status                 = "pending";
+
+			$morder->subscription_transaction_id = "";
+			
+			$morder->saveOrder();
+
+				$logs.='Update to pending OK.\n';
+		break;
 
 		default:
 
@@ -224,13 +268,15 @@ else
 		break;
 	}
 
+
 }
 
-$logs.='=========LOG EXIT===========\n';
 
 
-	$myfile = fopen("log.txt", "w") or die("Unable to open file!");
+	$logs.='=========LOG EXIT===========\n';
+
+
+	$myfile = fopen(dirname(__FILE__) . "/log.txt", "a") or die("Unable to open file!");
 	fwrite($myfile, $logs);
 	fclose($myfile);
 
-?>
