@@ -105,6 +105,9 @@ else
 			$morder->getMembershipLevel();
 			$morder->getUser();
 
+
+
+
 			//update membership
 			global $wpdb;
 
@@ -112,14 +115,21 @@ else
 			//set the start date to current_time('timestamp') but allow filters  (documented in preheaders/checkout.php)
 			$startdate = apply_filters( "pmpro_checkout_start_date", "'" . current_time( 'mysql' ) . "'", $morder->user_id, $morder->membership_level );
 
+			//If checking out for the same level, keep your old startdate.
+			$startdate = pmpro_dragonpay_checkout_start_date_keep_startdate($startdate, $morder->user_id , $morder->membership_level);
+
 			$logs.='Set startdate to '.$startdate.'\n';
 
 			//check if last order is active
 			$old_morder = new MemberOrder();
 			$old_morder->getLastMemberOrder($morder->user_id, 'success');
 
+			$level = $morder->membership_level;
 
-			//echo json_encode($old_morder);
+			$logs.='Get membership_level.\n';
+			$logs.=json_encode($morder->membership_level).'\n';
+			$morder->membership_level = pmpro_dragonpaypostback_level_extend_memberships($morder->membership_level,$morder->user_id );
+
 			
 			//fix expiration date
 			if ( ! empty( $morder->membership_level->expiration_number ) ) {
@@ -128,19 +138,7 @@ else
 				$enddate = "NULL";
 			}
 
-
-			//filter the enddate (documented in preheaders/checkout.php)
-			$enddate = apply_filters( "pmpro_checkout_end_date", $enddate, $morder->user_id, $morder->membership_level, $startdate );
-
-			$logs.="Expiry: ".$morder->membership_level->expiration_number.' '.$morder->membership_level->expiration_period;
-			$logs.="Enddate to: ".$enddate;
-
-
-			// $morder->ExpirationDate = $enddate;
-
-			//if($old_morder && $old_morder->id && $old_morder->status=='success'){
-			//	$enddate =  date("Y-m-d", strtotime(date("Y-m-d", strtotime($startdate)) . " + 1 year"));
-			//}
+			$logs.="Membership expiry date: ".$morder->membership_level->expiration_number.' '.$morder->membership_level->expiration_period.'\n';
 
 			//get discount code
 			$morder->getDiscountCode();

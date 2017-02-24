@@ -12,12 +12,12 @@ define("PMPRO_DRAGONPAY_DIR", dirname(__FILE__));
 //load payment gateway class
 require_once(PMPRO_DRAGONPAY_DIR . "/classes/class.pmprogateway_dragonpay.php");
 
-//services loaded by AJAX and via webhook, etc
-require_once(PMPRO_DRAGONPAY_DIR . "/includes/services.php");				
+require_once(PMPRO_DRAGONPAY_DIR . "/includes/services.php");	//services loaded by AJAX and via webhook, etc
+require_once(PMPRO_DRAGONPAY_DIR . "/includes/filters.php");				//filters, hacks, etc, moved into the plugin			
 
 
 // quitely exit if PMPro isn't active
-if (! defined('PMPRO_DIR') && ! function_exists('pmpro_init'))
+if (! defined('PMPRO_DRAGONPAY_DIR') )
 	return;
 
 //add dragonpay as a valid gateway
