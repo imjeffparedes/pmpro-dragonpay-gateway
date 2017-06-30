@@ -26,23 +26,23 @@ This steps will install the plugin and can be activated as Production or Testing
 
 2. Create folder  "pmpro-dragonpay-gateway"
 
-3. And copy all these files to this folder "pmpro-dragonpay-gateway.php, classes/* , includes/* , and services/* "
+3. And copy all these files to this folder "**pmpro-dragonpay-gateway.php**, **classes/*** , **includes/*** , and **services/*** "
 
-4. Go to your WordPress Portal an navigate to Plugins " https://www.yoursite.com/members/wp-admin/plugins.php "
+4. Go to your **WordPress Portal** an navigate to **Plugins** " https://www.yoursite.com/members/wp-admin/plugins.php "
 
 5. Activate DragonPay Gateway for Paid Memberships Pro Plugin
 
-6. Setup DragonPay Settings. Navigate to WordPress Dashboard > Membership > Payment Setting (https://www.yoursite.com/members/wp-admin/admin.php?page=pmpro-paymentsettings). Then choose Dragon Pay as your Payment Setting
+6. Setup DragonPay Settings. Navigate to **WordPress Dashboard > Membership > Payment Setting** (https://www.yoursite.com/members/wp-admin/admin.php?page=pmpro-paymentsettings). Then choose Dragon Pay as your Payment Setting
 
 7. Fill Up your Merchant details provided by Dragon Pay contacts and Choose your development environment.
 
 8. Create your postback page / Payment Status Page
 
-9. Navigate to  WordPress Dashboard > Page Creator. Then Add New Page.
+9. Navigate to  **WordPress Dashboard > Page Creator**. Then Add New Page.
 
-10. Copy content of to create the page "payment-status.php". IMPORTANT! Replace the page links of the content on TODO area.
+10. Copy content of to create the page "**payment-status.php**". **IMPORTANT!** Replace the page links of the content on TODO area.
 
-11. IMPORTANT! Tell your Dragon Pay contacts to redirect the payment postback to this Payment Status page in order to activate the payment. This will update the status of payment on your website.
+11. **IMPORTANT!** Tell your Dragon Pay contacts to redirect the payment postback to this Payment Status page in order to activate the payment. This will update the status of payment on your website.
 
 
 ## Customization
