@@ -33,21 +33,19 @@ This steps will install the plugin and can be activated as Production or Testing
 
 5. Activate DragonPay Gateway for Paid Memberships Pro Plugin
 
-6. Setup DragonPay Settins
+6. Setup DragonPay Settings. Navigate to WordPress Dashboard > Membership > Payment Setting (https://www.yoursite.com/members/wp-admin/admin.php?page=pmpro-paymentsettings)
+7. Then choose Dragon Pay as your Payment Setting
+8. Fill Up your Merchant details provided by Dragon Pay contacts and Choose your development environment.
+9. Create your postback page / Payment Status Page
+10. Navigate to  WordPress Dashboard > Page Creator.
+11. Then Add New Page
+12. Copy content of to create the page "payment-status.php"
+13. IMPORTANT! Replace the page links of the content on TODO area.
+14. IMPORTANT! Tell your Dragon Pay contacts to redirect the payment postback to this Payment Status page in order to activate the payment. This will update the status of payment on your website.
 
-1. Navigate to WordPress Dashboard > Membership > Payment Setting (https://www.yoursite.com/members/wp-admin/admin.php?page=pmpro-paymentsettings)
-2. Then choose Dragon Pay as your Payment Setting
-3. Fill Up your Merchant details provided by Dragon Pay contacts and Choose your development environment.
+Here's what it looks like on Payment Settings
 
 ![alt text](https://raw.githubusercontent.com/imjeffparedes/pmpro-dragonpay-gateway/images/payment-settings.png)
-
-8. Create your postback page / Payment Status Page
-8.1. Navigate to  WordPress Dashboard > Page Creator.
-8.2. Then Add New Page
-8.3. Copy content of to create the page "payment-status.php"
-8.4. IMPORTANT! Replace the page links of the content on TODO area.
-
-9. IMPORTANT! Tell your Dragon Pay contacts to redirect the payment postback to this Payment Status page in order to activate the payment. This will update the status of payment on your website.
 
 Here's what it looks like upon payment
 
