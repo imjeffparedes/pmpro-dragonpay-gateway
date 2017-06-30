@@ -23,32 +23,17 @@ here https://www.paidmembershipspro.com/step-by-step-guides/pdf-guides/how-to-se
 Please follow these step by step series of examples that tell you have to use this plugin.
 This steps will install the plugin and can be activated as Production or Testing env.
 
-1. Navigate to this folder
-```
-ftp://ftp.yoursite.com/public_html/members/wp-content/plugins/
-```
-2. Create folder 
+1. Open your site files and Navigate to this folder "ftp://ftp.yoursite.com/public_html/members/wp-content/plugins/"
 
-```
-pmpro-dragonpay-gateway
-```
-3. And copy all these files to this folder
-```
-pmpro-dragonpay-gateway.php, classes/* , includes/* , and services/*
-```
+2. Create folder  "pmpro-dragonpay-gateway"
 
-4. Go to your WordPress Portal an navigate to Plugins
+3. And copy all these files to this folder "pmpro-dragonpay-gateway.php, classes/* , includes/* , and services/* "
 
-```
-https://www.yoursite.com/members/wp-admin/plugins.php
-```
+4. Go to your WordPress Portal an navigate to Plugins " https://www.yoursite.com/members/wp-admin/plugins.php "
 
-5. Activate DragonPay Gateway for Paid Memberships Pro Plugin
+5.Activate DragonPay Gateway for Paid Memberships Pro Plugin
 
-6. Navigate to WordPress Dashboard > Membership > Payment Setting
-```
-https://www.yoursite.com/members/wp-admin/admin.php?page=pmpro-paymentsettings
-```
+6. Navigate to WordPress Dashboard > Membership > Payment Setting (https://www.yoursite.com/members/wp-admin/admin.php?page=pmpro-paymentsettings)
 Then choose Dragon Pay as your Payment Setting
 
 7. Fill Up your Merchant details provided by Dragon Pay contacts. And Choose your development environment.
@@ -57,13 +42,11 @@ Then choose Dragon Pay as your Payment Setting
 
 8. Create your postback page / Payment Status Page
 
-Navigate to  WordPress Dashboard > Page Creator. Then Add New Page
-Copy content of to create the page
+	1 .Navigate to  WordPress Dashboard > Page Creator.
+	2. Then Add New Page
+	3. Copy content of to create the page "payment-status.php"
+	4. IMPORTANT! Replace the page links of the content on TODO area.
 
-```
-payment-status.php
-IMPORTANT! Replace the page links of the content on TODO area.
-```
 9. IMPORTANT! Tell your Dragon Pay contacts to redirect the payment postback to this Payment Status page in order to activate the payment. This will update the status of payment on your website.
 
 Here's what it looks like upon payment
