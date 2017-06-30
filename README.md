@@ -47,7 +47,7 @@ This steps will install the plugin and can be activated as Production or Testing
 
 ## Customization
 
-Changed DragonPay Checkout button image on "classes/class.pmprogateway_dragonpay.php" line 189
+Changed DragonPay Checkout button image on "**classes/class.pmprogateway_dragonpay.php**" line 189
 
 ```
 #!html
