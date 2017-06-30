@@ -1,1 +1,0 @@
-# pmpro-dragonpay-gateway
