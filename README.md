@@ -23,8 +23,6 @@ here https://www.paidmembershipspro.com/step-by-step-guides/pdf-guides/how-to-se
 Please follow these step by step series of examples that tell you have to use this plugin.
 This steps will install the plugin and can be activated as Production or Testing env.
 
-ftp://ftp.yoursite.com/public_html/members/wp-content/plugins/pmpro-dragonpay-gateway
-
 1. Navigate to this folder
 ```
 ftp://ftp.yoursite.com/public_html/members/wp-content/plugins/
