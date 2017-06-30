@@ -35,10 +35,9 @@ This steps will install the plugin and can be activated as Production or Testing
 
 6. Setup DragonPay Settins
 
-6. 1. Navigate to WordPress Dashboard > Membership > Payment Setting (https://www.yoursite.com/members/wp-admin/admin.php?page=pmpro-paymentsettings)
-6. 2. Then choose Dragon Pay as your Payment Setting
-
-6. 3. Fill Up your Merchant details provided by Dragon Pay contacts and Choose your development environment.
+1. Navigate to WordPress Dashboard > Membership > Payment Setting (https://www.yoursite.com/members/wp-admin/admin.php?page=pmpro-paymentsettings)
+2. Then choose Dragon Pay as your Payment Setting
+3. Fill Up your Merchant details provided by Dragon Pay contacts and Choose your development environment.
 
 ![alt text](https://raw.githubusercontent.com/imjeffparedes/pmpro-dragonpay-gateway/images/payment-settings.png)
 
