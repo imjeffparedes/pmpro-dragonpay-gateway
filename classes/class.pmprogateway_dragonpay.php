@@ -186,7 +186,7 @@
 			?>
 			<span id="pmpro_dragonpay_checkout" <?php if(($gateway != "dragonpay") || !$pmpro_requirebilling) { ?>style="display: none;"<?php } ?>>
 				<input type="hidden" name="submit-checkout" value="1" />
-				<input type="image" class="pmpro_btn-submit-checkout" value="Check Out with DragonPay &raquo;" width="150px" src="http://www.upcatreview.com/dragonpay/logo_dragonpay.png" />
+				<input type="image" class="pmpro_btn-submit-checkout" value="Check Out with DragonPay &raquo;" width="150px" src="https://www.dragonpay.ph/wp-content/themes/wp365_theme/img/logo_dragonpay.png" />
 			</span>
 
 			<span id="pmpro_submit_span" style="display: none;">
