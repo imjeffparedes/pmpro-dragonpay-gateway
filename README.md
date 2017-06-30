@@ -14,8 +14,7 @@ These instructions will get you a copy of the project up and running on your Wor
 
 ### Prerequisites
 
-Install Paid Membership Pro 
-here https://www.paidmembershipspro.com/step-by-step-guides/pdf-guides/how-to-set-up-paid-memberships-pro/
+Install Paid Membership Pro. Visit here for more info. https://www.paidmembershipspro.com/step-by-step-guides/pdf-guides/how-to-set-up-paid-memberships-pro/
 
 
 ### Installing
