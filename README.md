@@ -44,13 +44,6 @@ This steps will install the plugin and can be activated as Production or Testing
 
 11. IMPORTANT! Tell your Dragon Pay contacts to redirect the payment postback to this Payment Status page in order to activate the payment. This will update the status of payment on your website.
 
-Here's what it looks like on Payment Settings
-
-![alt text](https://raw.githubusercontent.com/imjeffparedes/pmpro-dragonpay-gateway/images/payment-settings.png)
-
-Here's what it looks like upon payment
-
-![alt text](https://raw.githubusercontent.com/imjeffparedes/pmpro-dragonpay-gateway/images/payment-demo.png)
 
 ## Customization
 
