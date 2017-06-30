@@ -52,6 +52,16 @@ Here's what it looks like upon payment
 
 ![alt text](https://raw.githubusercontent.com/imjeffparedes/pmpro-dragonpay-gateway/images/payment-demo.png)
 
+## Customization
+
+Changed DragonPay Checkout button image on "classes/class.pmprogateway_dragonpay.php" line 189
+
+```
+#!html
+
+<input type="image" class="pmpro_btn-submit-checkout" value="Check Out with DragonPay &raquo;" width="150px" src="**https://www.dragonpay.ph/wp-content/themes/wp365_theme/img/logo_dragonpay.png**" />
+```
+
 ## Deployment
 
 Inorder to use DragonPay Test env/merchant account, change Gateway Environment on Payment Setting
